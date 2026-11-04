@@ -37,9 +37,10 @@ This document distinguishes implemented behaviour from the product roadmap. It i
 - Encrypted backup/export, Windows installer, and end-user recovery workflow.
 - Full frontend typecheck/build; the preparation environment could not access the npm registry and no lockfile was generated.
 
-## Validation performed locally
+## Validation performed
 
 - Backend pytest suite: 34 tests passed, including spoofed-provider rejection, one-use replay prevention, expiry, missing storage consent, and transaction-time transfer-permission rechecks.
 - Python bytecode compilation: passed.
-- Frontend dependencies could not be installed in the preparation environment; frontend typecheck/build remains unverified.
-- Ruff could not be installed in the preparation environment; Ruff CI check is configured but has not run here.
+- Ruff, Python bytecode compilation, and all 34 backend tests passed in GitHub Actions on Python 3.11, 3.12, and 3.13 (CI run 41818979251).
+- Frontend TypeScript typecheck and Vite production build passed in the same GitHub Actions run. Local npm installation was unavailable in the preparation environment, so frontend verification was performed on the clean CI runner.
+- The repository does not yet contain a frontend lockfile; exact transitive dependency reproducibility remains a follow-up task.
