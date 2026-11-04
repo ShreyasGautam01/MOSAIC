@@ -52,13 +52,11 @@ In a second PowerShell window:
 
 ```powershell
 cd frontend
-npm install
+npm ci
 npm run dev
 ```
 
 Open `http://127.0.0.1:5173`. The frontend talks only to the local API at `http://127.0.0.1:8765`.
-
-> `package-lock.json` is not yet committed because the build environment used to prepare this slice had no npm registry network access. Until it is generated and committed, `npm install` resolves the exact top-level versions in `package.json` but does not provide a fully locked transitive dependency graph. Generate and commit the lockfile before treating frontend builds as reproducible releases.
 
 ## Run the test suite
 
