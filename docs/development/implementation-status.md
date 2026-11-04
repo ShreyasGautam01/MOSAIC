@@ -22,7 +22,7 @@ This document distinguishes implemented behaviour from the product roadmap. It i
 - Candidate/rejected/withdrawn knowledge is blocked from context packets; only user-confirmed or validated states are exportable.
 - Objective/context packet APIs and server-issued, 24-hour single-use analysis handoffs bound to workspace, source conversation, source provider, destination provider, content hash, and redaction report. Provider attribution is derived from the handoff record, not a client field. Permissions and policy status are rechecked transactionally when returned analysis is persisted.
 - Objective response provider attribution is derived from the prepared context packet, not a client field; destination and source-transfer policies are rechecked before response persistence, and each session accepts one response.
-- Initial React UI for Overview, Import, Conversations, Knowledge review, and provider policy Settings.
+- Initial React UI for Overview, Import, Conversations and Knowledge review.
 
 ## Not implemented yet
 
@@ -35,12 +35,11 @@ This document distinguishes implemented behaviour from the product roadmap. It i
 - Experiment design/runner, benchmark suite management, and evidence-gated procedure promotion.
 - Browser companion. No provider page scraping, DOM access, cookies, auto-fill, or auto-submit is included.
 - Encrypted backup/export, Windows installer, and end-user recovery workflow.
-- Frontend dependency lockfile and deterministic `npm ci` workflow; current CI uses `npm install` and verifies typecheck/build successfully.
 
 ## Validation performed
 
-- Backend pytest suite: 34 tests passed, including spoofed-provider rejection, one-use replay prevention, expiry, missing storage consent, and transaction-time transfer-permission rechecks.
-- Python bytecode compilation: passed.
-- Ruff, Python bytecode compilation, and all 34 backend tests passed in GitHub Actions on Python 3.11, 3.12, and 3.13 (CI run 41818979251).
-- Frontend TypeScript typecheck and Vite production build passed in the same GitHub Actions run. Local npm installation was unavailable in the preparation environment, so frontend verification was performed on the clean CI runner.
-- The repository does not yet contain a frontend lockfile; exact transitive dependency reproducibility remains a follow-up task.
+- Local backend pytest suite: **34 passed**.
+- Local Python bytecode compilation: passed.
+- GitHub Actions run [41818979251](https://github.com/ShreyasGautam01/MOSAIC/actions/runs/41818979251): Ruff, bytecode compilation, and all 34 backend tests passed on Python 3.11, 3.12, and 3.13.
+- The same CI run successfully installed frontend dependencies, passed the TypeScript typecheck, and produced a Vite production build.
+- The preparation environment cannot resolve `registry.npmjs.org`, so a frontend `package-lock.json` has not yet been generated. CI success verifies the current install/build, but the transitive dependency graph is not yet pinned for reproducible local installs.
