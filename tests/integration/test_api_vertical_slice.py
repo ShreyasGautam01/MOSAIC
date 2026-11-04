@@ -82,7 +82,7 @@ def test_import_requires_explicit_local_storage_confirmation(client, chatgpt_zip
 
 
 def test_source_linked_analysis_candidates_and_transfer_gate(client, chatgpt_zip) -> None:
-    imported = _import_zip(client, chatgpt_zip)
+    _import_zip(client, chatgpt_zip)
     conversation = client.get("/api/v1/conversations").json()[0]
     conversation_id = conversation["id"]
     messages = client.get(f"/api/v1/conversations/{conversation_id}").json()["messages"]
@@ -433,7 +433,6 @@ def test_provider_policy_review_requires_explicit_acknowledgement_and_https(clie
 def test_restricted_provider_policy_blocks_cross_provider_handoff(client, chatgpt_zip):
     _import_zip(client, chatgpt_zip)
     conversation_id = client.get("/api/v1/conversations").json()[0]["id"]
-    messages = client.get(f"/api/v1/conversations/{conversation_id}").json()["messages"]
     assert client.put("/api/v1/settings/providers/chatgpt/permissions", json={
         "allow_store": True, "allow_index": True, "allow_derive": True,
         "allow_strategy_analysis": False, "allow_cross_provider_transfer": True,

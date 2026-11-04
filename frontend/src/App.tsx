@@ -10,7 +10,7 @@ type Conversation = {
 };
 type Knowledge = {
   id: string; kind: string; scope: string; canonical_text: string; description: string;
-  status: string; interpretation_class: string; support_level: string; evidence_count: number;
+  status: string; interpretation_class: string; support_level: string; evidence_count: number; version: number;
 };
 type Health = { status: string; version: string; local_model_configured: boolean };
 type ProviderPolicy = {

@@ -10,8 +10,8 @@ from pathlib import Path, PurePath
 
 from mosaic.config import Settings
 from mosaic.db.database import Database
-from mosaic.importers.archive import UnsafeArchiveError, inspect_chat_archive
-from mosaic.importers.chatgpt import ImportFormatError, parse_chatgpt_json
+from mosaic.importers.archive import inspect_chat_archive
+from mosaic.importers.chatgpt import parse_chatgpt_json
 from mosaic.importers.transcript import parse_transcript
 from mosaic.repositories import (
     find_duplicate_source,
