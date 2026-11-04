@@ -22,7 +22,7 @@ This document distinguishes implemented behaviour from the product roadmap. It i
 - Candidate/rejected/withdrawn knowledge is blocked from context packets; only user-confirmed or validated states are exportable.
 - Objective/context packet APIs and server-issued, 24-hour single-use analysis handoffs bound to workspace, source conversation, source provider, destination provider, content hash, and redaction report. Provider attribution is derived from the handoff record, not a client field. Permissions and policy status are rechecked transactionally when returned analysis is persisted.
 - Objective response provider attribution is derived from the prepared context packet, not a client field; destination and source-transfer policies are rechecked before response persistence, and each session accepts one response.
-- Initial React UI for Overview, Import, Conversations and Knowledge review.
+- Initial React UI for Overview, Import, Conversations, Knowledge review, and provider policy Settings.
 
 ## Not implemented yet
 
@@ -35,7 +35,7 @@ This document distinguishes implemented behaviour from the product roadmap. It i
 - Experiment design/runner, benchmark suite management, and evidence-gated procedure promotion.
 - Browser companion. No provider page scraping, DOM access, cookies, auto-fill, or auto-submit is included.
 - Encrypted backup/export, Windows installer, and end-user recovery workflow.
-- Full frontend typecheck/build; the preparation environment could not access the npm registry and no lockfile was generated.
+- Frontend dependency lockfile and deterministic `npm ci` workflow; current CI uses `npm install` and verifies typecheck/build successfully.
 
 ## Validation performed
 
