@@ -1,0 +1,60 @@
+flowchart TB
+  U[User] --> UI[React + TypeScript UI]
+  U --> EXT[Optional Browser Companion<br/>outbound-only]
+  EXT -->|copy packet / open URL| UI
+  UI --> API[Local FastAPI API]
+
+  subgraph Core[Modular Monolith]
+    API --> JOBS[Durable Job Queue]
+    JOBS --> IMP[Import Adapters]
+    IMP --> CAN[Canonical Conversation Model]
+    CAN --> SEM[Semantic Interpretation Pipeline]
+    SEM --> DET[Deterministic Parsers & Validators]
+    SEM --> LOCAL[Optional Local LLM Adapter]
+    SEM --> ASSIST[User-Mediated External Analysis Packet]
+    ASSIST -->|user pastes response| API
+
+    CAN --> KNOW[Knowledge & Evidence Manager]
+    SEM --> KNOW
+    KNOW --> RET[FTS5 Retrieval & Context Builder]
+    RET --> COO[Objective & Coordination Manager]
+    COO --> PACK[Versioned Context Packets]
+    PACK --> UI
+    API --> RESP[Manual Response Intake]
+    RESP --> KNOW
+
+    KNOW --> LEARN[Learning Controller]
+    LEARN --> EXP[Bounded Experiment Engine]
+    EXP --> EVAL[Evaluation & Regression Gates]
+    EVAL --> LEARN
+    LEARN --> KNOW
+    POL[Policy, Redaction & Audit Layer] --- IMP
+    POL --- SEM
+    POL --- COO
+    POL --- LEARN
+  end
+
+  subgraph Persistence[Local Persistence]
+    DB[(SQLite<br/>metadata, messages, knowledge,<br/>jobs, experiments)]
+    FTS[(SQLite FTS5<br/>full-text indexes)]
+    FS[(Local File Store<br/>original archives / exports)]
+  end
+  IMP --> FS
+  IMP --> DB
+  CAN --> DB
+  KNOW --> DB
+  RET --> FTS
+  DB <--> FTS
+  EXP --> DB
+  API --> DB
+
+  PROVIDERS[Consumer AI Websites<br/>ChatGPT / Claude / Gemini / others]
+  UI -->|user copies packet| PROVIDERS
+  PROVIDERS -->|user manually returns response| UI
+
+  classDef core fill:#e8f1ff,stroke:#5279ad,color:#13243a;
+  classDef persist fill:#e9f7ef,stroke:#4e9568,color:#153522;
+  classDef policy fill:#fff4db,stroke:#bf8a27,color:#4c3711;
+  class UI,API,IMP,CAN,SEM,KNOW,RET,COO,PACK,RESP,LEARN,EXP,EVAL,JOBS core;
+  class DB,FTS,FS persist;
+  class POL policy;

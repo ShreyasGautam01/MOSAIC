@@ -1,0 +1,52 @@
+[build-system]
+requires = ["hatchling>=1.26"]
+build-backend = "hatchling.build"
+
+[project]
+name = "mosaic-intelligence"
+version = "0.1.0"
+description = "Local-first cross-model conversation intelligence and knowledge system"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "Mosaic contributors" }]
+dependencies = [
+  "fastapi>=0.115,<1.0",
+  "uvicorn[standard]>=0.30,<1.0",
+  "pydantic>=2.9,<3.0",
+  "python-multipart>=0.0.9,<1.0",
+  "httpx>=0.27,<1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.3,<10.0",
+  "httpx>=0.27,<1.0",
+  "ruff>=0.9,<1.0",
+  "mypy>=1.13,<2.0",
+]
+
+[project.scripts]
+mosaic = "mosaic.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/mosaic"]
+artifacts = ["src/mosaic/db/migrations/*.sql"]
+
+[tool.pytest.ini_options]
+addopts = "-ra --strict-markers"
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_unused_ignores = true
+mypy_path = "src"
