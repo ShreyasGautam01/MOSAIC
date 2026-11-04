@@ -68,7 +68,7 @@ ruff check .
 python -m compileall -q src tests
 ```
 
-The backend test suite currently has 34 passing tests covering import parsing/security, API integration, policy-aware indexing, source-grounded extraction, candidate review, provider policy attestations, transfer gates, single-use handoff expiry/replay/spoofing protections, credential redaction, and loopback-only configuration. Frontend build/type-check is pending dependency installation in a network-enabled environment.
+The backend test suite currently has 34 passing tests covering import parsing/security, API integration, policy-aware indexing, source-grounded extraction, candidate review, provider policy attestations, transfer gates, single-use handoff expiry/replay/spoofing protections, credential redaction, and loopback-only configuration. GitHub Actions has verified Ruff, bytecode compilation, and all 34 tests on Python 3.11, 3.12, and 3.13; it has also verified the frontend TypeScript typecheck and Vite production build. The frontend dependency lockfile is still pending, so a fully reproducible transitive dependency graph is not yet committed.
 
 ## Current import support
 
